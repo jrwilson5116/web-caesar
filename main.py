@@ -1,6 +1,9 @@
 
 from flask import request
 from flask import Flask
+from flask import Flask, request
+
+from caesar import rotate_string
 
 app = Flask(__name__)
 app.config['DEBUG']=True
@@ -49,7 +52,7 @@ form = """
 
     <body>
 
-		<form action = "">
+		<form action = "/" method = "post">
 			Rotate by: 
 			<input name ="rot" type ="text" value = 0>
 			<br><br>
@@ -57,7 +60,6 @@ form = """
 			<br><br>
 			<input type ="submit">
   
-
 		</form>
 
     </body>
@@ -68,8 +70,14 @@ form = """
 @app.route("/")
 def index():
     return form
-    
 
+
+@app.route("/",methods = ['POST'])
+def encrypt():
+    rotate= request.form['rot']
+    message=request.form['text']
+    jumble=rotate_string(message,rotate)
+    return "<h1><jumble></h1>"
 
 
 if __name__=="__main__":
