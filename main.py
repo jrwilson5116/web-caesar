@@ -20,7 +20,7 @@ form = """
 
         <style>
 
-            form {
+            form {{
 
                 background-color: #eee;
 
@@ -34,9 +34,9 @@ form = """
 
                 border-radius: 10px;
 
-            }
+            }}
 
-            textarea {
+            textarea {{
 
                 margin: 10px 0;
 
@@ -44,7 +44,7 @@ form = """
 
                 height: 120px;
 
-            }
+            }}
 
         </style>
 
@@ -56,7 +56,7 @@ form = """
 			Rotate by: 
 			<input name ="rot" type ="text" value = 0>
 			<br><br>
-			<textarea rows="4" cols="50"></textarea>
+			<textarea name = "text" rows="4" cols="50">{0}</textarea>
 			<br><br>
 			<input type ="submit">
   
@@ -69,7 +69,7 @@ form = """
 
 @app.route("/")
 def index():
-    return form
+    return form.format("")
 
 
 @app.route("/",methods = ['POST'])
@@ -77,7 +77,8 @@ def encrypt():
     rotate= request.form['rot']
     message=request.form['text']
     jumble=rotate_string(message,rotate)
-    return "<h1><jumble></h1>"
+    #return "<<h1>"+ jumble +"</h1>"
+    return form.format(jumble)
 
 
 if __name__=="__main__":
