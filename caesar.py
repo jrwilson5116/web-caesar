@@ -23,18 +23,9 @@ def rotate_character(char, rot):
     for i in range(97,123):
         alphabet.append(chr(i))
 
-    # upper_alphabet = []
-    # for i in range(65, 91):
-    #     upper_alphabet.append(chr(i))
-
     if char.isalpha():
         new_position = alphabet_position(char) + int(rot)
-
-        while new_position > 25 or new_position < 0:
-            if new_position > 25:
-                new_position = new_position - 26
-            elif new_position < 0:
-                new_position = new_position + 26
+        new_position %= 26
 
     if char.isupper():
         current = alphabet[new_position]
