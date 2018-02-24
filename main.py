@@ -1,8 +1,4 @@
-
-from flask import request
-from flask import Flask
 from flask import Flask, request
-
 from caesar import rotate_string
 
 app = Flask(__name__)
